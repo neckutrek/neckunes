@@ -20,10 +20,10 @@
 
 #include "main_loop_callback.h"
 
- #include <chrono>
- #include <utility>
- #include <type_traits>
- #include <thread>
+#include <chrono>
+#include <utility>
+#include <type_traits>
+#include <thread>
 
 namespace neckunes
 {
@@ -38,7 +38,7 @@ MainLoop<CallbackT>::MainLoop()
 template<class CallbackT>
 void MainLoop<CallbackT>::start()
 {
-   const std::chrono::microseconds n_ms_per_tick( getNumMsPerTick() );
+   const std::chrono::nanoseconds nanosecsPerTick( _nanosecsPerTick );
 
    bool run = true;
    while ( run )
@@ -48,13 +48,12 @@ void MainLoop<CallbackT>::start()
       _callback.tick();
 
       auto end_time = std::chrono::high_resolution_clock::now();
-      auto duration = std::chrono::duration_cast<std::chrono::microseconds>
+      auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>
          (end_time - begin_time);
 
-      if ( duration < n_ms_per_tick )
+      if ( duration < nanosecsPerTick )
       {
-         std::chrono::microseconds sleeptime = n_ms_per_tick - duration;
-         std::this_thread::sleep_for( sleeptime );
+         std::this_thread::sleep_for( nanosecsPerTick - duration );
       }
    }
 

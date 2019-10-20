@@ -6,6 +6,7 @@
         120
     ],
     "files.associations": {
-        "chrono": "cpp"
+        "chrono": "cpp",
+        "thread": "cpp"
     }
 }

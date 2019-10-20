@@ -34,6 +34,7 @@ public:
 int main(int argc, char** argv)
 {
    neckunes::MainLoop<CB> mainLoop;
+   mainLoop.setTickSpeed( 4 );
 
    mainLoop.start();
 

@@ -16,8 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- #ifndef __NECKUNES_MAIN_LOOP_H__
- #define __NECKUNES_MAIN_LOOP_H__
+#ifndef __NECKUNES_MAIN_LOOP_H__
+#define __NECKUNES_MAIN_LOOP_H__
 
 #include "main_loop_callback.h"
 
@@ -30,17 +30,22 @@ class MainLoop
 public:
                MainLoop();
 
+   inline void setTickSpeed(double hertz)
+   {
+      _nanosecsPerTick = hertzToNanosecs( hertz );
+   }
+
    void        start();
 
 private:
 
    CallbackT         _callback;
 
-   const int         _n_ms_per_tick = getNumMsPerTick();
+   int               _nanosecsPerTick = hertzToNanosecs( 1'790'000'000 );
 
-   constexpr int     getNumMsPerTick()
+   constexpr int     hertzToNanosecs(double hertz)
    {
-      return (int)( 1.0 / ( 1.79 ) + 0.5 );
+      return (int)( 1000000000.0 / hertz + 0.5 );
    }
    
 };
@@ -49,4 +54,4 @@ private:
 
 #include "main_loop.hpp"
 
- #endif
+#endif
