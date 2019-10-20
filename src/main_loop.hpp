@@ -16,10 +16,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- //#include "main_loop.h"
-
-#include "main_loop_callback.h"
-
 #include <chrono>
 #include <utility>
 #include <type_traits>
@@ -27,6 +23,39 @@
 
 namespace neckunes
 {
+
+class MainLoopCallback
+{
+public:
+   virtual ~MainLoopCallback() = default;
+   virtual void tick() = 0;
+};
+
+template<class CallbackT>
+class MainLoop
+{
+public:
+               MainLoop();
+
+   inline void setTickSpeed(double hertz)
+   {
+      _nanosecsPerTick = hertzToNanosecs( hertz );
+   }
+
+   void        start();
+
+private:
+
+   CallbackT         _callback;
+
+   int               _nanosecsPerTick = hertzToNanosecs( 1'790'000'000 );
+
+   constexpr int     hertzToNanosecs(double hertz)
+   {
+      return (int)( 1000000000.0 / hertz + 0.5 );
+   }
+   
+};
 
 template<class CallbackT>
 MainLoop<CallbackT>::MainLoop()
