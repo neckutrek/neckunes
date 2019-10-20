@@ -18,7 +18,7 @@
 
 #include <iostream>
 
-#include "main_loop.h"
+#include "main_loop.hpp"
 
 class CB : public neckunes::MainLoopCallback
 {
