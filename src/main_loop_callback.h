@@ -16,27 +16,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <iostream>
+ #ifndef __NECKUNES_MAIN_LOOP_CALLBACK_H__
+ #define __NECKUNES_MAIN_LOOP_CALLBACK_H__
 
-#include "main_loop.h"
+namespace neckunes
+{
 
-class CB : public neckunes::MainLoopCallback
+class MainLoopCallback
 {
 public:
-   ~CB() = default;
-   void tick()
-   {
-      std::cout << ". ";
-      std::cout.flush();
-   }
+   virtual ~MainLoopCallback() = default;
+   virtual void tick() = 0;
 };
 
-int main(int argc, char** argv)
-{
-   neckunes::MainLoop<CB> mainLoop;
+} // namespace neckunes
 
-   mainLoop.start();
-
-   
-   return 0;
-}
+ #endif

@@ -7,6 +7,7 @@ set( CMAKE_PREFIX_PATH $ENV{CMAKE_PREFIX_PATH} )
 ## Specify a project name
 project( NeckuNES )
 
+set( CMAKE_CXX_FLAGS "-Wpedantic -Wall -O0 -std=c++17 -g" )
 
 ## Set the build type
 if( NOT CMAKE_BUILD_TYPE )

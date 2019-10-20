@@ -16,27 +16,37 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <iostream>
+ #ifndef __NECKUNES_MAIN_LOOP_H__
+ #define __NECKUNES_MAIN_LOOP_H__
 
-#include "main_loop.h"
+#include "main_loop_callback.h"
 
-class CB : public neckunes::MainLoopCallback
+namespace neckunes
+{
+
+template<class CallbackT>
+class MainLoop
 {
 public:
-   ~CB() = default;
-   void tick()
+               MainLoop();
+
+   void        start();
+
+private:
+
+   CallbackT         _callback;
+
+   const int         _n_ms_per_tick = getNumMsPerTick();
+
+   constexpr int     getNumMsPerTick()
    {
-      std::cout << ". ";
-      std::cout.flush();
+      return (int)( 1.0 / ( 1.79 ) + 0.5 );
    }
+   
 };
 
-int main(int argc, char** argv)
-{
-   neckunes::MainLoop<CB> mainLoop;
+} // namespace neckunes
 
-   mainLoop.start();
+#include "main_loop.hpp"
 
-   
-   return 0;
-}
+ #endif

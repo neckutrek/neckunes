@@ -1,0 +1,11 @@
+{
+    "editor.tabSize": 3,
+    "workbench.tree.indent": 16,
+    "editor.rulers": [
+        80,
+        120
+    ],
+    "files.associations": {
+        "chrono": "cpp"
+    }
+}
