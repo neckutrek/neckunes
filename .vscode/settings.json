@@ -8,5 +8,7 @@
     "files.associations": {
         "chrono": "cpp",
         "thread": "cpp"
-    }
+    },
+    "python.pythonPath": "${workspaceFolder}/.venv/bin/python3",
+    "python.venvPath": "${workspaceFolder}/.venv"
 }
